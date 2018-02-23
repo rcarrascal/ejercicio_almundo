@@ -13,6 +13,7 @@ public class Call {
     
     private String id;
     private Employee employee;
+    private String status;
 
     public Call(String id) {
         this.id = id;

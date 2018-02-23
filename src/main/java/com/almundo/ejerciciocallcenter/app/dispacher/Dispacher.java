@@ -8,7 +8,7 @@ package com.almundo.ejerciciocallcenter.app.dispacher;
 import com.almundo.ejerciciocallcenter.app.model.Call;
 
 /**
- *
+ * Servicio encargado de lanzar la llamada a la cola para ser procesada
  * @author rcarrascal
  */
 public interface Dispacher {

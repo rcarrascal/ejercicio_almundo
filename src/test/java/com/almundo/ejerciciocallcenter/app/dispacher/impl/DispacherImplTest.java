@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
+ * Pruebalas llamadas simultaneas unitaria para
  *
  * @author rcarrascal
  */
@@ -32,7 +33,7 @@ public class DispacherImplTest {
 
     @Autowired
     private EmpleoyeService empleoyeService;
-    
+
     @Autowired
     private CallTask calltask;
 
@@ -40,8 +41,8 @@ public class DispacherImplTest {
     }
 
     /**
-     * Prueba para verificar que se asignan las llamadas correctamente y como quedan en espera si 
-     * todos los empleados estan ocupados
+     * Prueba para verificar que se asignan las llamadas correctamente y como
+     * quedan en espera si todos los empleados estan ocupados
      */
     @Test
     public void testDispatchCall() {
@@ -56,13 +57,13 @@ public class DispacherImplTest {
         empleoyeService.addEmpleoye(new Employee("Daniela", Employee.Rol.SUPERVISOR));
         empleoyeService.addEmpleoye(new Employee("Mariana", Employee.Rol.DIRECTOR));
 
-        for (int  i = 0; i < 11; i++) {
-            final int suma=i;
+        for (int i = 0; i < 11; i++) {
+            final int suma = i;
             executor.submit(() -> {
-                dispacher.dispatchCall(new Call(""+suma));
+                dispacher.dispatchCall(new Call("" + suma));
             });
         }
-        
+
         try {
             TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {

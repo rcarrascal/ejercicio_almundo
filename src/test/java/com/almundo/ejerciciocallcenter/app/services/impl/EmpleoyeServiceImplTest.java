@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
+ * Prueba unitaria para comprobar la disponibilidad de los empleados
  *
  * @author rcarrascal
  */
@@ -36,12 +37,12 @@ public class EmpleoyeServiceImplTest {
         Queue<Employee> employees = empleoyeService.getOperators();
 
         assertEquals(employees.peek().getName(), "Ronald");
-        
+
         empleoyeService.addEmpleoye(new Employee("Supervisor", Employee.Rol.SUPERVISOR));
         Queue<Employee> supervisor = empleoyeService.getSupervisors();
 
         assertEquals(supervisor.peek().getName(), "Supervisor");
-        
+
         empleoyeService.addEmpleoye(new Employee("Director", Employee.Rol.DIRECTOR));
         Queue<Employee> directores = empleoyeService.getDirectors();
 
@@ -55,25 +56,25 @@ public class EmpleoyeServiceImplTest {
      */
     @Test
     public void testGetEmployeAvailabilable() {
-        System.out.println("getEmployeAvailabilable");
+        System.out.println("getEmployeAvailable");
         empleoyeService.addEmpleoye(new Employee("SUPERVISOR", Employee.Rol.SUPERVISOR));
         empleoyeService.addEmpleoye(new Employee("OPERADOR", Employee.Rol.OPERATOR));
         empleoyeService.addEmpleoye(new Employee("OPERADOR", Employee.Rol.OPERATOR));
         empleoyeService.addEmpleoye(new Employee("DIRECTOR", Employee.Rol.DIRECTOR));
-        
-        Employee operador1=empleoyeService.getEmployeAvailabilable();
+
+        Employee operador1 = empleoyeService.getEmployeAvailable();
         System.out.println("Empleado: " + operador1);
         assertEquals(operador1.getName(), "OPERADOR");
-        
-        Employee operador2=empleoyeService.getEmployeAvailabilable();
+
+        Employee operador2 = empleoyeService.getEmployeAvailable();
         System.out.println("Empleado: " + operador2);
         assertEquals(operador2.getName(), "OPERADOR");
-        
-        Employee supervisor=empleoyeService.getEmployeAvailabilable();
+
+        Employee supervisor = empleoyeService.getEmployeAvailable();
         System.out.println("Empleado: " + supervisor);
         assertEquals(supervisor.getName(), "SUPERVISOR");
-        
-        Employee director=empleoyeService.getEmployeAvailabilable();
+
+        Employee director = empleoyeService.getEmployeAvailable();
         System.out.println("Empleado: " + director);
         assertEquals(director.getName(), "DIRECTOR");
 

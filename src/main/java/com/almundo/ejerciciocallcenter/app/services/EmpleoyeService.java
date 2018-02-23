@@ -24,7 +24,7 @@ public interface EmpleoyeService {
      * Obtenemos el empleado disponible actualmente
      * @return
      */
-    Employee getEmployeAvailabilable();
+    Employee getEmployeAvailable();
     
     /**
      * Obtenemos un empleado operador especifico

@@ -51,13 +51,12 @@ public class EmpleoyeServiceImpl implements EmpleoyeService {
     }
 
     @Override
-    public Employee getEmployeAvailabilable() {
+    public Employee getEmployeAvailable() {
         LOGGER.debug("Obtenemos el empleado disponible actualmente");
         Employee employee = null;
         employee = operators.poll();
         if (employee == null) {
             employee = supervisors.poll();
-            
         }
 
         if (employee == null) {
@@ -65,7 +64,6 @@ public class EmpleoyeServiceImpl implements EmpleoyeService {
         }
 
         LOGGER.debug("Empleado resultado " + employee);
-
         return employee;
     }
 

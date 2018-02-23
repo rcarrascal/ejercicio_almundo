@@ -20,6 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * Clase encargada de ejecutar las tareas relacionadas con las llamadas. Dicha
+ * clase se encarga de iniciar un proceso temporizado donde leera de una cola
+ * concurrente todas las llamadas entrantes. Dicha cola solo tomara las llamadas
+ * cuando encuentre un empleado disponible, en caso de no encontrar empleado
+ * disponible la llamada quedara en dicha cola esperando a ser atendida. Las
+ * llamadas que no tengan asignado un empleado, es porque esta en espera de
+ * disponibilidad.
  *
  * @author rcarrascal
  */
@@ -44,6 +51,9 @@ public class CallTask {
         this.calls = new LinkedBlockingQueue<>();
     }
 
+    /*
+     * Metodo encargado de iniciar el proceso temporizado de lectura de cola de llamadas
+     */
     public void init() {
         executor.submit(() -> {
             this.execute();
@@ -63,10 +73,10 @@ public class CallTask {
         LOGGER.info("Iniciamos procesador de llamadas");
         while (isAlive) {
             //Obtenemos el empleado disponible para ejecutar la llamada
-            Optional.ofNullable(empleoyeService.getEmployeAvailabilable())
+            Optional.ofNullable(empleoyeService.getEmployeAvailable())
                     .ifPresent(employee -> {
                         try {
-                            
+
                             //Si enconramos un empleado dispoible le asignamos llamada
                             Call currentCall = calls.take();
 
@@ -75,7 +85,7 @@ public class CallTask {
                                 call(currentCall);
                             });
                         } catch (InterruptedException ex) {
-                            LOGGER.error("Error obteniendo llamada",ex);
+                            LOGGER.error("Error obteniendo llamada", ex);
                         }
                     });
 
