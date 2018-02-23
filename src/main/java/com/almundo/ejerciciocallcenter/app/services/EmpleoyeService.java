@@ -15,7 +15,7 @@ import java.util.Queue;
 public interface EmpleoyeService {
     
     /**
-     * Agregamos un empleado a la memoria
+     * Agregamos un empleado disponible a la memoria
      * @param employee
      */
     void addEmpleoye(Employee employee);
