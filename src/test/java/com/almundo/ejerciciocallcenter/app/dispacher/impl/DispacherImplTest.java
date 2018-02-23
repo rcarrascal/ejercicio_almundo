@@ -40,7 +40,8 @@ public class DispacherImplTest {
     }
 
     /**
-     * Prueba para verificar que se asignan las llamadas correctamente
+     * Prueba para verificar que se asignan las llamadas correctamente y como quedan en espera si 
+     * todos los empleados estan ocupados
      */
     @Test
     public void testDispatchCall() {
