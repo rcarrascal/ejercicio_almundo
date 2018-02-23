@@ -9,6 +9,9 @@ import com.almundo.ejerciciocallcenter.app.dispacher.Dispacher;
 import com.almundo.ejerciciocallcenter.app.model.Call;
 import com.almundo.ejerciciocallcenter.app.model.Employee;
 import com.almundo.ejerciciocallcenter.app.services.EmpleoyeService;
+import com.almundo.ejerciciocallcenter.app.task.CallTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +32,9 @@ public class DispacherImplTest {
 
     @Autowired
     private EmpleoyeService empleoyeService;
+    
+    @Autowired
+    private CallTask calltask;
 
     public DispacherImplTest() {
     }
@@ -39,6 +45,8 @@ public class DispacherImplTest {
     @Test
     public void testDispatchCall() {
         System.out.println("dispatchCall");
+        ExecutorService executor = Executors.newFixedThreadPool(11);
+        calltask.init();
         //Agregamos los empleados
         empleoyeService.addEmpleoye(new Employee("Ronald", Employee.Rol.OPERATOR));
         empleoyeService.addEmpleoye(new Employee("Juan", Employee.Rol.OPERATOR));
@@ -47,15 +55,18 @@ public class DispacherImplTest {
         empleoyeService.addEmpleoye(new Employee("Daniela", Employee.Rol.SUPERVISOR));
         empleoyeService.addEmpleoye(new Employee("Mariana", Employee.Rol.DIRECTOR));
 
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
-        dispacher.dispatchCall(new Call());
+        for (int  i = 0; i < 11; i++) {
+            final int suma=i;
+            executor.submit(() -> {
+                dispacher.dispatchCall(new Call(""+suma));
+            });
+        }
         
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

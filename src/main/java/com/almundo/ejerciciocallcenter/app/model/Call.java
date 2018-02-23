@@ -14,6 +14,12 @@ public class Call {
     private String id;
     private Employee employee;
 
+    public Call(String id) {
+        this.id = id;
+    }
+    
+    
+
     public String getId() {
         return id;
     }

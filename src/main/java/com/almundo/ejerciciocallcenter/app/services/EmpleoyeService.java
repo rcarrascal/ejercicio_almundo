@@ -6,7 +6,7 @@
 package com.almundo.ejerciciocallcenter.app.services;
 
 import com.almundo.ejerciciocallcenter.app.model.Employee;
-import java.util.Optional;
+import java.util.Queue;
 
 /**
  *
@@ -25,6 +25,24 @@ public interface EmpleoyeService {
      * @return
      */
     Employee getEmployeAvailabilable();
+    
+    /**
+     * Obtenemos un empleado operador especifico
+     * @return
+     */
+    Queue<Employee> getOperators();
+    
+    /**
+     * Obtenemos un empleado Supervisor especifico
+     * @return
+     */
+    Queue<Employee> getSupervisors();
+    
+    /**
+     * Obtenemos un empleado Director especifico
+     * @return
+     */
+    Queue<Employee> getDirectors();
     
     
     

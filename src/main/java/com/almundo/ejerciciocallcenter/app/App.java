@@ -4,6 +4,7 @@ package com.almundo.ejerciciocallcenter.app;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.almundo.ejerciciocallcenter.app.task.CallTask;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,5 +17,8 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext context=SpringApplication.run(App.class, args);
+        context.getBean(CallTask.class).init();
     }
+    
+    
 }

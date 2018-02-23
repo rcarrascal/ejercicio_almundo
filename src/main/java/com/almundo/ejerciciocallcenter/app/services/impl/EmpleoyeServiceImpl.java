@@ -52,21 +52,36 @@ public class EmpleoyeServiceImpl implements EmpleoyeService {
 
     @Override
     public Employee getEmployeAvailabilable() {
-        LOGGER.info("Obtenemos el empleado disponible actualmente");
-        Employee employee=null;
-        employee=operators.poll();
-        if(employee==null){
-            employee=supervisors.poll();
-            return employee;
+        LOGGER.debug("Obtenemos el empleado disponible actualmente");
+        Employee employee = null;
+        employee = operators.poll();
+        if (employee == null) {
+            employee = supervisors.poll();
+            
         }
-        
-        if(employee==null){
-            employee=directors.poll();
+
+        if (employee == null) {
+            employee = directors.poll();
         }
-        
-        LOGGER.info("Empleado resultado " + employee);
-        
+
+        LOGGER.debug("Empleado resultado " + employee);
+
         return employee;
+    }
+
+    @Override
+    public Queue<Employee> getOperators() {
+        return operators;
+    }
+
+    @Override
+    public Queue<Employee> getSupervisors() {
+        return supervisors;
+    }
+
+    @Override
+    public Queue<Employee> getDirectors() {
+        return directors;
     }
 
 }
